@@ -1,52 +1,54 @@
-def add(x, y):
-    """This function adds two numbers"""
-    return x + y
+import tkinter as tk
+from tkinter import messagebox
 
-def subtract(x, y):
-    """This function subtracts two numbers"""
-    return x - y
+def on_click(button_text):
+    current_text = entry.get()
 
-def multiply(x, y):
-    """This function multiplies two numbers"""
-    return x * y
-
-def divide(x, y):
-    """This function divides two numbers"""
-    if y == 0:
-        return "Error! Division by zero."
-    return x / y
-
-print("Select operation:")
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")
-
-while True:
-    choice = input("Enter choice(1/2/3/4): ")
-
-    if choice in ('1', '2', '3', '4'):
+    if button_text == "C":
+        entry.delete(0, tk.END)
+    elif button_text == "=":
         try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-            continue
-
-        if choice == '1':
-            print(num1, "+", num2, "=", add(num1, num2))
-
-        elif choice == '2':
-            print(num1, "-", num2, "=", subtract(num1, num2))
-
-        elif choice == '3':
-            print(num1, "*", num2, "=", multiply(num1, num2))
-
-        elif choice == '4':
-            print(num1, "/", num2, "=", divide(num1, num2))
-
-        next_calculation = input("Let's do next calculation? (yes/no): ")
-        if next_calculation == "no":
-          break
+            result = eval(current_text)
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, str(result))
+        except Exception as e:
+            messagebox.showerror("Hata", "Geçersiz İşlem")
+            entry.delete(0, tk.END)
     else:
-        print("Invalid Input")
+        entry.insert(tk.END, button_text)
+
+# Ana pencereyi oluştur
+root = tk.Tk()
+root.title("Modern Hesap Makinesi")
+root.geometry("400x600")
+root.configure(bg="#2E2E2E")
+
+# Giriş alanı
+entry = tk.Entry(root, font=("Arial", 24), borderwidth=2, relief="solid", justify="right", bg="#3B3B3B", fg="white")
+entry.pack(pady=20, padx=10, fill="x")
+
+# Düğme çerçevesi
+button_frame = tk.Frame(root, bg="#2E2E2E")
+button_frame.pack(pady=10, padx=10)
+
+# Düğmeler
+buttons = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    'C', '0', '=', '+'
+]
+
+row_val = 0
+col_val = 0
+
+for button in buttons:
+    action = lambda x=button: on_click(x)
+    tk.Button(button_frame, text=button, font=("Arial", 18), bg="#505050", fg="white", height=2, width=4, command=action).grid(row=row_val, column=col_val, padx=5, pady=5)
+    col_val += 1
+    if col_val > 3:
+        col_val = 0
+        row_val += 1
+
+# Pencereyi çalıştır
+root.mainloop()
