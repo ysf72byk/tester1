@@ -1,10 +1,11 @@
 <?php
 // Load the language file
 function loadLanguage($lang = 'en'){
-  if(file_exists('../app/languages/' . $lang . '.php')){
-    require_once '../app/languages/' . $lang . '.php';
+  $lang_file_path = dirname(__DIR__) . '/languages/' . $lang . '.php';
+  if(file_exists($lang_file_path)){
+    require_once $lang_file_path;
   } else {
-    require_once '../app/languages/en.php';
+    require_once dirname(__DIR__) . '/languages/en.php';
   }
 }
 

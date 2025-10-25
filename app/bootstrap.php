@@ -1,19 +1,19 @@
 <?php
-  // Load Config
-  require_once '../core/config.php';
+  // Load Config using an absolute path
+  require_once dirname(__DIR__) . '/core/config.php';
 
-  // Require our controller
-  require_once '../core/Controller.php';
+  // Require our controller using an absolute path
+  require_once dirname(__DIR__) . '/core/Controller.php';
 
-  // Autoload Core Libraries
+  // Autoload Core Libraries using an absolute path
   spl_autoload_register(function($className){
-    require_once '../core/' . $className . '.php';
+    require_once dirname(__DIR__) . '/core/' . $className . '.php';
   });
 
-  // Load Helpers
-  require_once 'helpers/url_helper.php';
-  require_once 'helpers/session_helper.php';
-  require_once 'helpers/language_helper.php';
+  // Load Helpers using an absolute path
+  require_once __DIR__ . '/helpers/url_helper.php';
+  require_once __DIR__ . '/helpers/session_helper.php';
+  require_once __DIR__ . '/helpers/language_helper.php';
 
   // Load Language
   loadLanguage('tr');
