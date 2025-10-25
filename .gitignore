@@ -1,0 +1,12 @@
+# Jules-specific files
+jules-scratch/
+
+# Log files
+*.log
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db

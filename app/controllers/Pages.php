@@ -5,10 +5,6 @@
     }
 
     public function index(){
-      if(isLoggedIn()){
-        redirect('pages/index');
-      }
-
       $data = [
         'title' => 'Doktor Sepeti',
         'description' => 'Doktor Sepeti, doktorları ve hastaları bir araya getiren bir platformdur.'
